@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 require "sinatra"
 require "haml"
-require "tanka"
+require "fontpix"
 
 FONTS = {
   "KouzanBrushFontOTF" => " 衡山毛筆フォント",
@@ -52,9 +52,9 @@ helpers do
     FileUtils.mkdir_p(base_dir)
     output_path = File.join(base_dir, filename)
 
-    painter = Tanka::Painter.new
-    painter.guess_font(font || "Gyousyo")
-    painter.write_to_png(text, output_path)
+    writer = Fontpix::Writer.new
+    writer.guess_font(font || "Gyousyo")
+    writer.write_to_png(text, output_path)
 
     "#{base_url}/#{base_dir.gsub(/\Apublic\//, "")}/#{filename}"
   end
