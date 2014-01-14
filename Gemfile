@@ -2,7 +2,7 @@ source "https://rubygems.org/"
 
 gem "sinatra"
 gem "haml"
-gem "tanka"
+gem "fontpix"
 
 group :development, :test do
   gem "test-unit"

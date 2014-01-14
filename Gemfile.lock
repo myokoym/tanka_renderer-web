@@ -6,6 +6,10 @@ GEM
     fontdock (0.0.2)
       pango
       thor
+    fontpix (0.0.1)
+      cairo
+      fontdock (>= 0.0.2)
+      pango
     glib2 (2.1.0)
       pkg-config
     haml (4.0.4)
@@ -24,10 +28,6 @@ GEM
       rack (~> 1.4)
       rack-protection (~> 1.4)
       tilt (~> 1.3, >= 1.3.4)
-    tanka (0.0.1)
-      cairo
-      fontdock (>= 0.0.2)
-      pango
     test-unit (2.5.5)
     test-unit-notify (1.0.1)
       test-unit (>= 2.4.9)
@@ -41,10 +41,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  fontpix
   haml
   rack-test
   sinatra
-  tanka
   test-unit
   test-unit-notify
   test-unit-rr
