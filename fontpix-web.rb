@@ -4,10 +4,10 @@ require "haml"
 require "fontpix"
 
 FONTS = {
-  "KouzanBrushFontOTF" => " 衡山毛筆フォント",
-  "KouzanBrushFontGyousyo" => " 衡山毛筆フォント行書",
-  "KouzanBrushFontSousyo" => " 衡山毛筆フォント草書",
-  "AoyagiSosekiFont2" => " 青柳疎石フォント2",
+  "KouzanBrushFontOTF" => "衡山毛筆フォント",
+  "KouzanBrushFontGyousyo" => "衡山毛筆フォント行書",
+  "KouzanBrushFontSousyo" => "衡山毛筆フォント草書",
+  "AoyagiSosekiFont2" => "青柳疎石フォント2",
 }
 
 get "/" do
