@@ -7,7 +7,6 @@ FONTS = {
   "KouzanBrushFontOTF" => " 衡山毛筆フォント",
   "KouzanBrushFontGyousyo" => " 衡山毛筆フォント行書",
   "KouzanBrushFontSousyo" => " 衡山毛筆フォント草書",
-  "AoyagiKouzanFontT" => " 青柳衡山フォントT",
   "AoyagiSosekiFont2" => " 青柳疎石フォント2",
 }
 
