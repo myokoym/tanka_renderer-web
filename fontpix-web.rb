@@ -13,6 +13,7 @@ FONTS = {
 get "/" do
   @fonts = FONTS
   @params ||= {}
+  @params[:text] ||= default_text
   haml :index
 end
 
@@ -29,6 +30,21 @@ post "/" do
 end
 
 helpers do
+  def default_text
+    <<-END_OF_TEXT
+春はあけぼの やう／＼しろく成り行く
+山ぎは すこしあかりて むらさきだちたる
+雲のほそくたなびきたる
+
+夏はよる 月の比はさら也 やみも猶
+ほたるの多く飛びちがひたる
+又 ただ一つ二つなどほのかに
+うちひかりて行くもをかし
+
+                           「枕草子」より
+    END_OF_TEXT
+  end
+
   def text
     @text ||= params[:text]
   end
