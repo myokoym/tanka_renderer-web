@@ -20,7 +20,7 @@ end
 post "/" do
   @fonts = FONTS
   begin
-    @download_url = render
+    @download_url = output_downloadable_file
   rescue => e
     return "Error: #{e}"
   end
@@ -61,7 +61,7 @@ helpers do
     @font ||= params[:font]
   end
 
-  def render
+  def output_downloadable_file
     today = Time.now.strftime("%Y%m%d")
     base_dir = "public/images/#{today}"
     FileUtils.mkdir_p(base_dir)
