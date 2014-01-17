@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 require "sinatra"
 require "haml"
-require "fontpix"
+require "tanka_renderer"
 
 FONTS = {
   "KouzanBrushFontOTF" => "衡山毛筆フォント",
@@ -20,7 +20,7 @@ end
 post "/" do
   @fonts = FONTS
   begin
-    @download_url = write_to_png
+    @download_url = render
   rescue => e
     return "Error: #{e}"
   end
@@ -61,15 +61,15 @@ helpers do
     @font ||= params[:font]
   end
 
-  def write_to_png
+  def render
     today = Time.now.strftime("%Y%m%d")
     base_dir = "public/images/#{today}"
     FileUtils.mkdir_p(base_dir)
     output_path = File.join(base_dir, filename)
 
-    writer = Fontpix::Writer.new
-    writer.guess_font(font || "Gyousyo")
-    writer.write_to_png(text, output_path)
+    renderer = TankaRenderer::Renderer::Image.new
+    renderer.guess_font(font || "Gyousyo")
+    renderer.render(text, output_path)
 
     "#{base_url}/#{base_dir.gsub(/\Apublic\//, "")}/#{filename}"
   end

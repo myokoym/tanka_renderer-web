@@ -2,7 +2,7 @@ source "https://rubygems.org/"
 
 gem "sinatra"
 gem "haml"
-gem "fontpix"
+gem "tanka_renderer"
 
 group :development, :test do
   gem "test-unit"
