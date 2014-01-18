@@ -15,9 +15,15 @@ DIRECTIONS = {
   "horizontal" => "横書",
 }
 
+FORMATS = {
+  "png" => "PNG",
+  "pdf" => "PDF",
+}
+
 get "/" do
   @fonts = FONTS
   @directions = DIRECTIONS
+  @formats = FORMATS
   @params ||= {}
   @params[:text] ||= default_text
   haml :index
@@ -26,6 +32,7 @@ end
 post "/" do
   @fonts = FONTS
   @directions = DIRECTIONS
+  @formats = FORMATS
   begin
     @download_url = output_downloadable_file
   rescue => e
@@ -60,12 +67,16 @@ helpers do
     return @filename if @filename
     @filename = params[:filename]
     @filename = Time.now.strftime("%Y%m%d%H%M%S") if @filename.empty?
-    @filename << ".png" unless /.png\z/ =~ @filename
+    @filename << ".#{format}" unless /.#{format}\z/ =~ @filename
     @filename
   end
 
   def font
     @font ||= params[:font]
+  end
+
+  def format
+    @format ||= params[:format]
   end
 
   def vertical?
@@ -78,12 +89,21 @@ helpers do
     FileUtils.mkdir_p(base_dir)
     output_path = File.join(base_dir, filename)
 
-    renderer = TankaRenderer::Renderer::Image.new
+    renderer = create_renderer
     renderer.guess_font(font || "Gyousyo")
     renderer.vertical = false unless vertical?
     renderer.render(text, output_path)
 
     "#{base_url}/#{base_dir.gsub(/\Apublic\//, "")}/#{filename}"
+  end
+
+  def create_renderer
+    case format
+    when "png"
+      TankaRenderer::Renderer::Image.new
+    when "pdf"
+      TankaRenderer::Renderer::PDF.new
+    end
   end
 
   def base_url

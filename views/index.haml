@@ -34,6 +34,11 @@
             - hash = {:value => key}
             - hash[:selected] = "selected" if key == @params[:direction]
             %option{hash}= name
+        %select{:name => "format"}
+          - @formats.each do |key, name|
+            - hash = {:value => key}
+            - hash[:selected] = "selected" if key == @params[:format]
+            %option{hash}= name
       %p
         出力ファイル名（省略可）
         %br
