@@ -10,8 +10,14 @@ FONTS = {
   "AoyagiSosekiFont2" => "青柳疎石フォント2",
 }
 
+DIRECTIONS = {
+  "vertical" => "縦書",
+  "horizontal" => "横書",
+}
+
 get "/" do
   @fonts = FONTS
+  @directions = DIRECTIONS
   @params ||= {}
   @params[:text] ||= default_text
   haml :index
@@ -19,6 +25,7 @@ end
 
 post "/" do
   @fonts = FONTS
+  @directions = DIRECTIONS
   begin
     @download_url = output_downloadable_file
   rescue => e
@@ -61,6 +68,10 @@ helpers do
     @font ||= params[:font]
   end
 
+  def vertical?
+    params[:direction] == "vertical"
+  end
+
   def output_downloadable_file
     today = Time.now.strftime("%Y%m%d")
     base_dir = "public/images/#{today}"
@@ -69,6 +80,7 @@ helpers do
 
     renderer = TankaRenderer::Renderer::Image.new
     renderer.guess_font(font || "Gyousyo")
+    renderer.vertical = false unless vertical?
     renderer.render(text, output_path)
 
     "#{base_url}/#{base_dir.gsub(/\Apublic\//, "")}/#{filename}"
