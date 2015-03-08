@@ -12,11 +12,11 @@ http://myokoym.net/tanka_renderer/
 
 ## License
 
-Copyright (c) 2014 Masafumi Yokoyama
+Copyright (c) 2014-2015 Masafumi Yokoyama `<myokoym@gmail.com>`
 
-LGPLv3 or later.
+MIT License.
 
-See 'license/lgpl-3.0.txt' or 'http://www.gnu.org/licenses/lgpl-3.0' for details.
+See 'LICENSE.txt' for details.
 
 ## Contributing
 
